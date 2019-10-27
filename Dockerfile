@@ -1,4 +1,4 @@
-FROM ubuntu:19.10
+FROM ubuntu:16.04
 
 ADD start.sh /start.sh
 
@@ -17,10 +17,7 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 ENV \
 	SSH_USER="app-admin" \
 	SSH_USER_PASSWORD="app-admin" \
-	SSH_USER_HOME="/home/%u" \
 	TZ="Asia/Shanghai"   
-ENV	NOTVISIBLE "in users profile"
-RUN echo "export VISIBLE=now" >> /etc/profile
 
 EXPOSE 22
 CMD ["/start.sh"]
