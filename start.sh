@@ -63,6 +63,7 @@ function main ()
 		__get_password "${password_length}"
 	)"}"
 	ssh_user="$(__get_ssh_user)"
+	ssh_root_password="$(__get_password "${password_length}")"
 	if [[ ${ssh_user} != root ]]
 	then
 		useradd -m \
@@ -72,14 +73,17 @@ function main ()
 					"${ssh_user}" \
 					"${ssh_user_password}" \
 				| chpasswd
+		echo -e "user name:${ssh_user} \n"
+		echo -e "user password:${ssh_user_password} \n"
 	fi
 	printf -- \
 			'%s:%s\n' \
 			"root" \
-			"$(__get_password "${password_length}")" \
+			"${ssh_root_password}" \
 			| chpasswd
+	echo -e "root password:${ssh_root_password}"
 }
 
 main "${@}"
 
-/usr/sbin/sshd -D
+exec /usr/sbin/sshd -D
