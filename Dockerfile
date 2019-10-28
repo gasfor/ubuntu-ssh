@@ -10,16 +10,14 @@ RUN sed -i \
 	  -e 's~^#UseDNS yes~UseDNS no~g' \
 	  -e 's~^\(.*\)/usr/libexec/openssh/sftp-server$~\1internal-sftp~g' \
 		/etc/ssh/sshd_config
-
-# SSH login fix. Otherwise user is kicked off after login
-RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd && \
-    chmod 755 /start.sh
-
 ENV \
 	SSH_USER="app-admin" \
 	SSH_USER_PASSWORD="app-admin" \
-	TZ="Asia/Shanghai"   
-
+	TZ="Asia/Shanghai"
+  
+# SSH login fix. Otherwise user is kicked off after login
+RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd && \
+    chmod 755 /start.sh
 EXPOSE 22
-CMD ["/start.sh"]
 
+CMD ["/start.sh"]
