@@ -71,7 +71,6 @@ function main ()
                 echo "user name is not exist, add user"
                 echo "user home path:${WORKDIR}"
 		useradd -m \
-                        -d "${WORKDIR}" \
 			"${ssh_user}"
 		printf -- \
 					'%s:%s\n' \
