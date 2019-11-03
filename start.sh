@@ -66,7 +66,14 @@ function main ()
 	ssh_root_password="$(__get_password "${password_length}")"
 	if [[ ${ssh_user} != root ]]
 	then
+	    echo "test1"
+            i=`cat /etc/passwd | cut -f1 -d':' | grep -w "${ssh_user}" -c`
+	    echo "test2"
+            if [[ $i -le 0 ]]; then
+                echo "user name is not exist, add user"
+                echo "user home path:${WORKDIR}"
 		useradd -m \
+                        -d "${WORKDIR}" \
 			"${ssh_user}"
 		printf -- \
 					'%s:%s\n' \
@@ -74,6 +81,7 @@ function main ()
 					"${ssh_user_password}" \
 				| chpasswd
 		echo -e "user name:${ssh_user} \n"
+             fi
 		echo -e "user password:${ssh_user_password} \n"
 	fi
 	printf -- \
