@@ -65,11 +65,10 @@ function main ()
 	ssh_user="$(__get_ssh_user)"
 	ssh_root_password="$(__get_password "${password_length}")"
 	if [[ ${ssh_user} != root ]]; then
-            if [ id -u $ssh_user >/dev/null 2>&1 ]; then
+            if id -u $ssh_user >/dev/null 2>&1; then
 	    	echo "user name is exist, only output password"
 	    else
                 echo "user name is not exist, add user"
-                echo "user home path:${WORKDIR}"
 		useradd -m \
 			"${ssh_user}"
 		printf -- \
@@ -77,7 +76,7 @@ function main ()
 					"${ssh_user}" \
 					"${ssh_user_password}" \
 				| chpasswd
-		echo -e "user name:${ssh_user} \n"
+		echo -e "user name:${ssh_user}"
              fi
 		echo -e "user password:${ssh_user_password} \n"
 	fi
