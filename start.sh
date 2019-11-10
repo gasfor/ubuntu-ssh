@@ -89,5 +89,6 @@ function main ()
 }
 
 main "${@}"
+export $(cat /proc/1/environ |tr '\0' '\n' | xargs)
 
 exec /usr/sbin/sshd -D
