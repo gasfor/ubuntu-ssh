@@ -86,7 +86,8 @@ function main ()
 			"${ssh_root_password}" \
 			| chpasswd
 	echo -e "root password:${ssh_root_password}"
-	echo -e "${ssh_user} ALL=(ALL) NOPASSWD:ALL" > /ect/sudoers.d/promission
+	touch /ect/sudoers.d/promission
+	echo -e "${ssh_user} ALL=(ALL) NOPASSWD:ALL" >> /ect/sudoers.d/promission
 	echo 'sudo export $(cat /proc/1/environ |tr '\0' '\n' | xargs)' >> /etc/profile
 }
 
