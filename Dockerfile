@@ -2,7 +2,8 @@ FROM ubuntu:16.04
 
 ADD start.sh /start.sh
 
-RUN apt-get update && apt-get install -y openssh-server --no-install-recommends
+RUN apt-get update && apt-get install -y openssh-server --no-install-recommends \
+    && apt-get install sudo
 RUN mkdir /var/run/sshd
 RUN sed -i \
 	  -e 's~^PasswordAuthentication yes~PasswordAuthentication no~g' \
