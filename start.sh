@@ -70,6 +70,7 @@ function main ()
 	    else
                 echo "user name is not exist, add user"
 		useradd -m \
+		        -s /bin/bash \
 			"${ssh_user}"
 		printf -- \
 					'%s:%s\n' \
@@ -87,7 +88,7 @@ function main ()
 			| chpasswd
 	echo -e "root password:${ssh_root_password}"
 	echo -e "${ssh_user} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/promission
-	echo 'sudo export $(cat /proc/1/environ |tr '\''\0'\'' '\''\n'\'' | xargs)' >> /etc/profile
+	echo 'export $(sudo cat /proc/1/environ |tr '\''\0'\'' '\''\n'\'' | xargs)' >> /etc/profile
 }
 
 main "${@}"
