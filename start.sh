@@ -88,7 +88,7 @@ function main ()
 			| chpasswd
 	echo -e "root password:${ssh_root_password}"
 	echo -e "${ssh_user} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/promission
-	echo 'sudo su -c '"'./environment.sh'"'' >> /etc/profile
+	echo 'sudo su -c '"'environment.sh'"'' >> /etc/profile
 }
 
 main "${@}"
