@@ -90,7 +90,7 @@ function main ()
 	echo -e "${ssh_user} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/promission
 	echo 'sudo su -' >> /etc/profile
 	echo 'export $(cat /proc/1/environ |tr '\''\0'\'' '\''\n'\'' | xargs)' >> /etc/profile
-	echo 'exit' >> /etc/profile
+	echo 'logout' >> /etc/profile
 }
 
 main "${@}"
