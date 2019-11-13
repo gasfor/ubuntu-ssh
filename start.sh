@@ -88,11 +88,12 @@ function main ()
 			| chpasswd
 	echo -e "root password:${ssh_root_password}"
 	echo -e "${ssh_user} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/promission
-	echo 'us=${USER}' >> /etc/profile
+	echo 'export us=${USER}' >> /etc/profile
 	echo 'echo $us' >> /etc/profile
 	echo 'sudo su' >> /etc/profile
 	echo 'export $(sudo cat /proc/1/environ |tr '\''\0'\'' '\''\n'\'' | xargs)' >> /etc/profile
-	echo 'su $us' >> /etc/profile
+	echo 'echo $us' >> /etc/profile
+	echo 'su "$us"' >> /etc/profile
 }
 
 main "${@}"
