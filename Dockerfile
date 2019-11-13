@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 
 ADD start.sh /start.sh
-ADD environment.sh /environment.sh
+ADD environment.sh /etc/
 
 RUN apt-get update && apt-get install -y openssh-server --no-install-recommends \
     && apt-get install sudo
